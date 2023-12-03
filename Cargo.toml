@@ -15,7 +15,6 @@ path = "src/main.rs"
 name = "bin_chicken"
 
 [dependencies]
-clap = { version = "4.0.18", features = ["derive"] }
+clap = { version = "4.4.10", features = ["derive", "unicode", "cargo"] }
 dialoguer = "0.10.2"
 dirs = "4.0.0"
-trash = "2.1.5"
