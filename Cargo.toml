@@ -18,3 +18,5 @@ name = "bin_chicken"
 clap = { version = "4.4.10", features = ["derive", "unicode", "cargo"] }
 dialoguer = "0.10.2"
 dirs = "4.0.0"
+mockall = "0.11.4"
+tempfile = "3.8.1"

@@ -4,7 +4,9 @@ mod paths;
 mod utils;
 
 use clap::{Arg, ArgMatches, Command};
+use paths::{check_file_exists_else_create, ProdPaths};
 use std::process::exit;
+use utils::ProdUtilities;
 
 use crate::file::File;
 
@@ -27,7 +29,7 @@ fn register_commands() -> ArgMatches {
 }
 
 fn main() {
-    paths::check();
+    check_file_exists_else_create::<ProdPaths>();
     let cmd = register_commands();
 
     match cmd.subcommand() {
@@ -40,11 +42,11 @@ fn main() {
             // Create as many files as needed
             // each file should move itself to the trash
             // and update the history file
-            File::new_from_name(test[0]).move_to_trash();
+            File::<ProdPaths, ProdUtilities>::new_from_name(test[0]).move_to_trash();
             exit(0)
         }
         Some(("undo", _)) => {
-            File::new_from_history().restore_from_trash();
+            File::<ProdPaths, ProdUtilities>::new_from_history().restore_from_trash();
             exit(0)
         }
         _ => unreachable!("parser should ensure only valid subcommand names are used"),
